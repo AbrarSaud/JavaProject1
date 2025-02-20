@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -16,7 +17,7 @@ public class Main {
         System.out.println("****************************");
     }
 
-    public static void askPlayerPosition(char[][] board, int[] move) {
+    public static void askPlayerPosition(char[][] board) {
         Scanner input = new Scanner(System.in);
         int pos; // Position
 
@@ -28,16 +29,32 @@ public class Main {
                 System.out.println("Invalid position! Please enter a number between 1 and 9.");
                 continue;
             }
-            move[0] = (pos - 1) / 3;
-            move[1] = (pos - 1) % 3;
-            if (board[move[0]][move[1]] == 'X' || board[move[0]][move[1]] == 'O') {
-                System.out.println("Position taken! Try again.");
+            int row = (pos - 1) / 3;
+            int col = (pos - 1) % 3;
+            if (board[row][col] != 'X' && board[row][col] != 'O') {
+                board[row][col] = 'X';
+                break;
             } else {
-                return;
+                System.out.println("Position taken! Try again.");
+
             }
-
-
         }
+    }
+
+    public static void computerMove(char[][] board) {
+        Random rand = new Random();
+        int row, col;
+        while (true) {
+            int pos = rand.nextInt(9) + 1;
+            row = (pos - 1) / 3;
+            col = (pos - 1) % 3;
+            if (board[row][col] != 'X' && board[row][col] != 'O') {
+                System.out.println("Computer chose position: " + pos);
+                board[row][col] = 'O';
+                break;
+            }
+        }
+
     }
 
 
@@ -51,11 +68,13 @@ public class Main {
                 {'7', '8', '9'},
         };
         printBoard(board);
-        while (true) {
-            int[] move = new int[2];
-            askPlayerPosition(board, move);
-            board[move[0]][move[1]] = 'X';
-            board[row][col] = 'X';
+
+        for (int i = 0; i < 9; i++) {
+
+            askPlayerPosition(board);
+            printBoard(board);
+
+            computerMove(board);
             printBoard(board);
         }
 
