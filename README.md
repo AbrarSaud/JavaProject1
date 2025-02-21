@@ -1,5 +1,5 @@
 # Tic-Tac-Toe Game 🎮
-<b>Tic-Tac-Toe game</b>in Java where you play VS the computer. The game allows you to choose between 1 or 3 rounds .
+<b>Tic-Tac-Toe game</b> in Java where you play VS the computer. The game allows you to choose between 1 or 3 rounds .
 
 ---
 ## Requirements:
